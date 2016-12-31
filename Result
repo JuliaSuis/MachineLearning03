@@ -1,0 +1,107 @@
+Running with Settings (ran on full frames)
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Features used : 'RLAaccx', 'RLAaccy', 'RLAaccz', 'RLAgyrx', 'RLAgyry', 'RLAgyrz'
+no of states : 5
+
+precision 0.473684210526
+recall 0.0810810810811
+true positives 9
+false positives 10
+false negatives 102
+-------------------------------------------------------------------------------------------
+Running with Settings (ran on full frames)
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Features used : 'RLAaccx', 'RLAaccy', 'RLAaccz'
+no of states : 5
+
+recall 0.0
+true positives 0
+false positives 0
+false negatives 111
+_____________________________________________________________________________________
+Running with Settings (ran on full frames)
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Features used : 'RLAaccx', 'RLAaccy', 'RLAaccz',
+No of sates : 3
+
+precision 0.2
+recall 0.036036036036
+true positives 4
+false positives 16
+false negatives 107
+
+------------------------------------------------------------------------
+Running with Settings (ran on full frames)
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Features used : 'RLAaccx', 'RLAaccy', 'RLAaccz'
+
+Made 2 models one with 3 states and one with 4 states.
+
+precision 0.0
+recall 0.0
+true positives 0
+false positives 4
+false negatives 111
+
+---------------------------------------------------------------------------------------
+Running with Settings (run on full frames)
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Testing:
+  Person_set : [11, 13, 15]
+  Label_set  : [18, 19, 20, 21]
+Features used : 'RLAaccx', 'RLAaccy', 'RLAaccz', 'RLAgyrx', 'RLAgyry', 'RLAgyrz'
+
+Made 2 models one with 3 states and one with 4 states.
+
+precision 0.588235294118
+recall 0.0900900900901
+true positives 10
+false positives 7
+false negatives 101
+
+------------------------------------------------------------------------------------------------
+
+When tried with 2 models and each with different features and number of sates the precision obtained was not good.
+
+------------------------------------------------------------------------------------------------
+Description of the work carried out in the story mode :)
+
+We started with running the simple model with different parameters and feature set. We have carried out different
+combination of states, transition probabilities and feature sets to see which feature can be used for better
+expressiveness. It turns out that the combination of Acc(X,Y,Z) and gyrr(X or Y) gave the best spotting for
+participant no :18, changing the transition probabilities however did no do any help but changing the states
+did show some changes. But again this time we where in the phase of trial and error methodology. when we ran the
+test with the same setup with different participants it gave different different results. So we decided to club in all
+data and label set for both training and testing. But for this setup the combination of Acc(X,Y,Z) and Gyrr(X,Y,Z) was
+the combination feature that gave some this like a result but still there where lot of time series that was spotted as
+drinking with label 90 where in reality it was not(Precision was 0.47). For this full data set we started with different
+number of states and features set which is specified in the above sections. Finally we decided to add multiple models
+and combine it in the top-level model. We created the 2 models passing the same feature set, but we made one model with
+3 sates and the second with 4 sates. The ration behind the number 3 and 4 was that the initial rum of the experiment with
+3 states gave the good result set and second phase with the full data set gave good result set with both 3 as well as 4.
+But when creating the threshold model the model was only created by including the model with number of states equals 4.
+The idea behind this was that we want to give a more chances to not to identify the sequences from the threshold model.
+The top level model was built with the combination of model1, model2 and the threshold model. When we ran the test it
+gave a better precision of .588 :)  to be continued..................
